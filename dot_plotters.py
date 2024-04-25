@@ -18,10 +18,10 @@ def median_circle(image: np.ndarray, loc: Tuple[int, int], r: int) -> np.ndarray
     """
     # create new bigger image if necessary
     p = pad_image(image.shape, loc, r)
-    next_image = np.zeros((image.shape[0] + p, image.shape[1] + p))
+    next_image = np.zeros((image.shape[0] + 2*p + 1, image.shape[1] + 2*p + 1))
     circle = np.array([[1.0 if (i-r-0.5)**2 + (j-r-0.5)**2 <= r**2 else 0.0 for i in range(2*r + 1)] for j in range(2*r + 1)])
     next_image[loc[0] + p - r : loc[0] + p + r + 1, loc[1] + p - r : loc[1] + p + r + 1] = circle
-    return next_image
+    return next_image[p:p+image.shape[0], p:p+image.shape[1]]
 
     
     
